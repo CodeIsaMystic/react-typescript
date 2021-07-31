@@ -17,8 +17,16 @@
   - [Notes on states Component](#notes-on-states-component)
 - [Type Inference with state](#type-inference-with-state)
   - [Relational with types logic](#relational-with-types-logic)
-  - [Keep it consistence with types definition](#keep-it-consistence-with-types-definition)
-  - [Just mapping data to render the values](#just-mapping-data-to-render-the-values)
+  - [Keep it consistent with types definition](#keep-it-consistent-with-types-definition)
+  - [Just mapping data to render some values](#just-mapping-data-to-render-some-values)
+- [More types with state](#more-types-with-state)
+  - [Custom type with condition](#custom-type-with-condition)
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ## Introduction to the following example
 
@@ -82,8 +90,6 @@ ReactDOM.render(<App />, document.querySelector('#root'));
 ## State with typescript
 
 ### Creating GuestList Functional Component
-  
-  ***!!!! MENTION THE INPUT COMPONENT IS A CONTROLLED COMPONENT !!!!***
 
 ```typescript
 /*  GuestList FC */
@@ -105,17 +111,20 @@ const GuestList: React.FC = () => {
 export default GuestList
 ```
 
-### Notes on states Component
+***NOTICE: MENTION THE INPUT COMPONENT IS A CONTROLLED COMPONENT!***
 
-***!!!! MENTION THE INPUT COMPONENT IS A CONTROLLED COMPONENT !!!!***
+### Notes on states Component
 
 1. **import** the `useState` hook from React
 2. **destructuring and customizing hook**, in this case to handle names.
 3. **adding an `onChange` event**, we do need to mention the `value` to be targeted on the `onChange()` callback `(e) => setName(e.target.value)`
 
+<br>
+
 4. After that we just will render data with `JSX` and `<li></li>` html element as a list.
 
-<br>
+***NOTICE: MENTION THE INPUT COMPONENT IS A CONTROLLED COMPONENT!***
+
 <br>
 <br>
 <br>
@@ -167,7 +176,7 @@ Typescript will look at `name` as a string type, and `guests` as an Array withou
 <br>
 <br>
 
-### Keep it consistence with types definition
+### Keep it consistent with types definition
 
 ***With `useState('')` setting name to `''` as initial value, typescript can understand what type we are looking for, and we will explicitly mention with the same process using `useState<string[]>([])` for an Array.***
 
@@ -180,11 +189,11 @@ Typescript will look at `name` as a string type, and `guests` as an Array withou
 <br>
 <br>
 
-### Just mapping data to render the values
+### Just mapping data to render some values
 
 To finish the job, we just are **mapping the text data typed** within the **Input Controlled Component**, added to **The GuestsList array**, rendered as well with **an `<li></li>` html tag**.
 
-***!!! THE KEY ATTRIBUTE WILL ALWAYS BE SPECIFIED WHEN MAPPING OVER ELEMENTS ON JSX!!!*** 
+***NOTICE: THE KEY ATTRIBUTE WILL ALWAYS BE SPECIFIED WHEN MAPPING OVER ELEMENTS ON JSX!*** 
 
 ```typescript
       <ul>
@@ -193,3 +202,72 @@ To finish the job, we just are **mapping the text data typed** within the **Inpu
         })}
       </ul>
 ```
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## More types with state
+
+Implementing a new `UserSearch` Component
+
+- to search a user in users array `const users = [{ name: 'John', age: 20 }, ...]`
+- and get the data to render with `JSX`
+
+***NOTICE: we do not are purposing building a full logic app on this specific work. We are just showing code, explaining and understanding basic states with the use of typescript.***
+
+<br>
+
+### Custom type with condition
+
+```typescript
+import { useState } from 'react'
+
+/* the data  */
+const users = [
+  { name: 'John', age: 20 },
+  { name: 'Jane', age: 21 },
+  { name: 'Henry', age: 40 },
+  { name: 'Harry', age: 20 },
+  { name: 'Robert', age: 40 },
+  { name: 'Brian', age: 18 },
+  { name: 'Scott', age: 20 },
+]
+
+/*  the UserSearch Functional Component  */
+const UserSearch: React.FC = () => {
+  const [ name, setName ] = useState('')
+  /*  An Object Custom type defined with the condition of undefined  */ 
+  const [ user, setUser ] = useState<{ name: string, age: number } | undefined>()
+
+  const onClick = () => {
+    const foundUser = users.find(user => user.name === name)
+    return setUser(foundUser) 
+  }
+
+  return (
+    <div>
+      User Search
+      <input value={name} onChange={e => setName(e.target.value)} />
+      <button onClick={onClick} >Find</button>
+      <div>
+        {/* the condition for the render */}
+        {user && user.name}
+        {user && user.age}
+      </div>
+
+    </div>
+  )
+}
+
+export default UserSearch
+```
+<br>
+<br>
+
+*We are here using in the custom hook, a **custom `object type` with the condition that it can be `undefined` too**.*
+
+`useState<{ name: string, age: number } | undefined>()`
+
+*here the JSX code condition :* `{user && user.name}`
