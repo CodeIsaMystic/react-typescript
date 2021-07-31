@@ -1,7 +1,7 @@
 <div align="center" >
-  <h1>React-typescript with Class Component</h1>
+  <h1>Typescript and Redux</h1>
 
-  <img src="https://ionicframework.com/blog/wp-content/uploads/2019/02/typescript-in-react.png"
+  <img src="https://miro.medium.com/max/1400/1*uPhcd64Bo0Ori-etGi1RfQ.png"
   style="max-width: 1050px; width: 100%; height: auto;">
 </div>
 
