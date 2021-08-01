@@ -11,7 +11,8 @@
 ## Table of content
 
 - [Table of content](#table-of-content)
-- [Introduction](#introduction)
+- [Introduction of Class Components](#introduction-of-class-components)
+- [](#)
 
 
 <br>
@@ -20,4 +21,12 @@
 <br>
 <br>
 
-## Introduction
+## Introduction of Class Components
+
+This section will demo the 3 following topics in a React class based components reproducing the `UserSearch` component:
+
+- how to **apply types to components props**
+- how to **apply types to components states**
+- how to **handle events**
+
+## 
