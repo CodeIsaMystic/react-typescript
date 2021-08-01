@@ -49,7 +49,7 @@ class UserSearch extends Component<UserSearchProps> {
           {user && user.name}
           {user && user.age}
         </div>
-    </div>
+      </div>
     )
   }
 }
