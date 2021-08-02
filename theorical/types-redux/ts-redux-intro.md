@@ -1,24 +1,16 @@
 <div align="center" >
-  <h1>Typescript and Redux Overview</h1>
+  <h1>Typescript - Redux: overview</h1>
 
   <img src="https://miro.medium.com/max/1400/1*uPhcd64Bo0Ori-etGi1RfQ.png"
   style="max-width: 1050px; width: 100%; height: auto;">
 </div>
 
-<br>
-<br>
-
-## Table of content
-
-- [Table of content](#table-of-content)
+**Table of content**
 - [Introduction](#introduction)
 - [Get it started](#get-it-started)
 - [Thinking about Design First](#thinking-about-design-first)
-  - [The NPM API](#the-npm-api)
+- [The NPM api](#the-npm-api)
 
-
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -35,9 +27,6 @@ It will use the NPM api package search...
 
 <br>
 <br>
-<br>
-<br>
-<br>
 
 ## Get it started
 
@@ -50,9 +39,6 @@ It will use the NPM api package search...
 3. **installing the exact versions**
 `$ npm install --save-exact @types/react-redux@7.1.15 axios@0.21.1 react-redux@7.2.2 redux@4.0.5 reudx-thunk@2.3.0 @types/react`
 
-<br>
-<br>
-<br>
 <br>
 <br>
 
@@ -69,12 +55,11 @@ It will use the NPM api package search...
 <br>
 <br>
 
+## The NPM api
 
-### The NPM API
+**Understand the data which it's gonna evenly being fetched from the api**
 
-Understand the data which it's gonna evenly being fetched from the api
-
-**Searching NPM Packages:**
+**Looking at the url:**
 
 `registry.npmjs.org/-/v1/search?text=react`
 
