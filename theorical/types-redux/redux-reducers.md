@@ -15,11 +15,11 @@
   - [Files Architecture](#files-architecture)
   - [Reducer file](#reducer-file)
     - [1. The Basics](#1-the-basics)
-    - [2.The Interface](#2the-interface)
+    - [2. The Interface](#2-the-interface)
     - [3. The Switch statements](#3-the-switch-statements)
     - [4. The Actions](#4-the-actions)
-      - [**NOTE :** as Simple is this Reducer, Typescript must do more...](#note--as-simple-is-this-reducer-typescript-must-do-more)
-    - [5.Typechecking with TS](#5typechecking-with-ts)
+      - [**NOTE :** as simple is this Reducer, Typescript must do more...](#note--as-simple-is-this-reducer-typescript-must-do-more)
+    - [5. Typechecking with TS](#5-typechecking-with-ts)
       - [**NOTE :** about avoiding the `any` TS type](#note--about-avoiding-the-any-ts-type)
 
 <br>
@@ -45,7 +45,7 @@ export default reducer
 <br>
 <br>
 
-#### 2.The Interface
+#### 2. The Interface
 
 ```typescript
 interface RepositoriesState {
@@ -123,7 +123,7 @@ export default reducer
 <br>
 <br>
 
-##### **NOTE :** as Simple is this Reducer, Typescript must do more...
+##### **NOTE :** as simple is this Reducer, Typescript must do more...
 
 We just noticed that ***this Reducer model should work but Typescript must do more, especially on that switch statement distributing data.***
 
@@ -136,7 +136,7 @@ it could be an Array of course, an object too but even strings and numbers!!! So
 <br>
 <br
 
-#### 5.Typechecking with TS
+#### 5. Typechecking with TS
 
  - **Defining the return values** `: RepositoriesState` of the reducer, we ensure Typescript is checking for us **what types of values we need for each properties** `{ loading: true, error: null, data: [] }`. Otherwise TS will show an error...
 
@@ -225,7 +225,7 @@ interface SearchRepositoriesErrorAction {
 } 
 ```
 
-*Applying those Actions intefaces:*
+*Applying those Actions interfaces:*
 
 ```typescript
 

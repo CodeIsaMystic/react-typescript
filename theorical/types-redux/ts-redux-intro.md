@@ -49,10 +49,10 @@ It will use the NPM api package search...
 
 ## Thinking about Design First
 
-***Before to code,** it could be clever to take some times thinking about what's gonna be m the Store of the Application!!!*
+***Before to code,** it could be clever to take some times thinking about what's gonna be the Store of the Application!!!*
 
 - about **the reducers**
-- **the informations** they gonna be to hold
+- **the information (data)** they gonna be to hold
 - the **different actions creators**
 - and **actions to be created** as well
 ...
