@@ -193,7 +193,7 @@ const reducer = (state: RepositoriesState, action: Action): RepositoriesState =>
 
 ##### **NOTE :** about avoiding the `any` TS type
 
-*Here a schema of why we potentially need to differenciate those Actions types...*
+*Here a schema of why we potentially need to differentiate those Actions types...*
 
 ![The repositories reducer organization](./images/repos-reducer-schema.png)
 
@@ -237,3 +237,6 @@ const reducer = (
     | SearchRepositoriesErrorAction
 ): RepositoriesState => { ... }
 ```
+
+***The typescript `interface` keyword is way have more control on our types, there are "Types Guards"***
+
