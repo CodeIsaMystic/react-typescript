@@ -13,13 +13,15 @@
 
 - [Reducer: creating & organizing](#reducer-creating--organizing)
   - [Files Architecture](#files-architecture)
-  - [Reducer file](#reducer-file)
+  - [Reducer file (repositoriesReducer.ts)](#reducer-file-repositoriesreducerts)
     - [1. The Basics](#1-the-basics)
     - [2. The Interface](#2-the-interface)
     - [3. The Switch statements](#3-the-switch-statements)
     - [4. The Actions](#4-the-actions)
       - [**NOTE :** as simple is this Reducer, Typescript must do more...](#note--as-simple-is-this-reducer-typescript-must-do-more)
     - [5. Typechecking with TS](#5-typechecking-with-ts)
+      - [**Defining the return values** `: RepositoriesState` of the reducer](#defining-the-return-values--repositoriesstate-of-the-reducer)
+      - [**Defining the Action types**](#defining-the-action-types)
       - [**NOTE :** about avoiding the `any` TS type](#note--about-avoiding-the-any-ts-type)
 
 <br>
@@ -32,7 +34,7 @@
 
 ![files architecture image](./images/files-arch1.png)
 
-### Reducer file
+### Reducer file (repositoriesReducer.ts)
 
 #### 1. The Basics
 
@@ -138,7 +140,9 @@ it could be an Array of course, an object too but even strings and numbers!!! So
 
 #### 5. Typechecking with TS
 
- - **Defining the return values** `: RepositoriesState` of the reducer, we ensure Typescript is checking for us **what types of values we need for each properties** `{ loading: true, error: null, data: [] }`. Otherwise TS will show an error...
+##### **Defining the return values** `: RepositoriesState` of the reducer
+
+We ensure Typescript is checking for us **what types of values we need for each properties `{ loading: true, error: null, data: [] }`. Otherwise TS will show an error...**
 
 <br>
 <br>
@@ -173,7 +177,9 @@ const reducer = (state: RepositoriesState, action: any): RepositoriesState => {
 export default reducer
 ```
 
-- **Defining the Action types, by adding an `interface`** and **replace it in the reducer function `action: Action`**
+##### **Defining the Action types** 
+
+By **adding an `interface`** and **replace it in the reducer function `action: Action`**
 
 ```typescript
 interface Action {
@@ -207,6 +213,8 @@ const reducer = (state: RepositoriesState, action: Action): RepositoriesState =>
 <br>
 <br>
 
+1. **Defining interfaces**
+
 *Here the code example in our app.*
 
 ```typescript
@@ -239,4 +247,71 @@ const reducer = (
 ```
 
 ***The typescript `interface` keyword is way have more control on our types, there are "Types Guards"***
+
+<br>
+<br>
+
+2. **Grouping those interfaces in One `type`**
+
+```typescript
+/* grouping all actions in one type called "Action" */
+type Action =
+    | SearchRepositoriesAction
+    | SearchRepositoriesSuccessAction
+    | SearchRepositoriesErrorAction
+  
+const reducer = (
+  state: RepositoriesState,
+  action: Action
+): RepositoriesState => {
+  switch (action.type) { ... }
+}
+```
+
+3. **Set an `enum` action type object**
+
+To approve ***code readability and following the convention, we replace the `'search_repositories_success'` by `SEARCH_REPOSITORIES_SUCCESS` all capitalized using the `enum` typescript keyword*** which set those string to an `ActionType` object.
+
+- **define `enum ActionType {}`**
+
+```typescript
+enum ActionType  {
+  SEARCH_REPOSITORIES = 'search_repositories',
+  SEARCH_REPOSITORIES_SUCCESS = 'search_repositories_success',
+  SEARCH_REPOSITORIES_ERROR = 'search_repositories_error'
+}
+```
+
+- **Accessing those**
+
+to access: `ActionType.SEARCH_REPOSITORIES`
+in our case: `case ActionType.SEARCH_REPOSITORIES :`
+
+- **Replacing in all file**
+
+```typescript
+const reducer = (
+  state: RepositoriesState,
+  action: Action
+): RepositoriesState => {
+  switch (action.type) {
+    case ActionType.SEARCH_REPOSITORIES :
+      return { loading: true, error: null, data: [] }
+    case ActionType.SEARCH_REPOSITORIES_SUCCESS :
+      return { loading: false, error: null, data: action.payload }
+    case ActionType.SEARCH_REPOSITORIES_ERROR :
+      return { loading: false, error: action.payload, data: [] }
+    default:
+      return state
+  }
+}
+```
+
+```typescript
+interface SearchRepositoriesAction  {
+  type: ActionType.SEARCH_REPOSITORIES
+}
+```
+
+4. **Extract those settings to a File**
 
