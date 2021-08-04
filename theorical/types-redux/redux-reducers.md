@@ -23,6 +23,9 @@
       - [**Defining the return values** `: RepositoriesState` of the reducer](#defining-the-return-values--repositoriesstate-of-the-reducer)
       - [**Defining the Action types**](#defining-the-action-types)
       - [**NOTE :** about avoiding the `any` TS type](#note--about-avoiding-the-any-ts-type)
+    - [6. Organizing Files Architecture](#6-organizing-files-architecture)
+      - [Files Architecture review](#files-architecture-review)
+      - [Files Architecture Pattern growing up](#files-architecture-pattern-growing-up)
 
 <br>
 <br>
@@ -125,6 +128,8 @@ export default reducer
 <br>
 <br>
 
+---
+
 ##### **NOTE :** as simple is this Reducer, Typescript must do more...
 
 We just noticed that ***this Reducer model should work but Typescript must do more, especially on that switch statement distributing data.***
@@ -134,6 +139,7 @@ You can clearly think that data could be as many types projects are different. A
 **Example of the data property :**
 it could be an Array of course, an object too but even strings and numbers!!! So we must use Typescript on that purpose!!
 
+---
 
 <br>
 <br
@@ -196,6 +202,8 @@ const reducer = (state: RepositoriesState, action: Action): RepositoriesState =>
 
 <br>
 <br>
+
+---
 
 ##### **NOTE :** about avoiding the `any` TS type
 
@@ -315,3 +323,71 @@ interface SearchRepositoriesAction  {
 
 4. **Extract those settings to a File**
 
+On that purpose, processing the code control of our projects, we must extract some works we do to improve even more our code base.
+
+ 1. We defined `interface`, grouped in one unique object type called `Action` to set the `reducer.action` property
+ 2. We defined an `enum ActionType` and replaced those on the `interface` and `reducer.action`
+ 3. Finally we'll extract in modifying our files architecture
+
+---
+
+<br>
+<br>
+<br>
+<br>
+
+#### 6. Organizing Files Architecture
+
+##### Files Architecture review
+
+![files architecture image](./images/files-arch2.png)
+
+- Create 2 folders `actions` and `action-types`
+- Create an `index.ts` file for each one
+- Extract actions to the `actions` folder:
+
+```typescript
+/*  adding the `export` keyword  */
+interface SearchRepositoriesAction  {
+  type: ActionType.SEARCH_REPOSITORIES
+}
+
+interface SearchRepositoriesSuccessAction {
+  type: ActionType.SEARCH_REPOSITORIES_SUCCESS
+ payload: string[] 
+}
+
+interface SearchRepositoriesErrorAction {
+  type: ActionType.SEARCH_REPOSITORIES_ERROR
+  payload: string   
+}
+
+export type Action =
+    | SearchRepositoriesAction
+    | SearchRepositoriesSuccessAction
+    | SearchRepositoriesErrorAction
+```
+
+- Extract `enum ActionType` to the `action-types` folder:
+
+```typescript
+/*  adding the `export` keyword  */
+export enum ActionType {
+  SEARCH_REPOSITORIES = 'search_repositories',
+  SEARCH_REPOSITORIES_SUCCESS = 'search_repositories_success',
+  SEARCH_REPOSITORIES_ERROR = 'search_repositories_error'
+}
+```
+
+- Use the `import` / `export` syntax to have access...
+
+##### Files Architecture Pattern growing up
+
+We can now easily visualize our code base as well organized, adding features on each sections of our project.
+
+1. We have our `state/` main folder for the "redux side project"
+2. The `reducers/` will contains all reducers we need
+3. And a `action-types/` folder to store all of our `enum` ActionTypes.
+4. finally we can grow up this kind of well architecture by adding some folders for each action types `interface`
+
+![files architecture image](./images/files-arch3.png)
