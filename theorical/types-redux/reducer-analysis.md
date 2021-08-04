@@ -10,7 +10,6 @@
 
 - [Introduction](#introduction)
 - [Specific analysis](#specific-analysis)
-  - [**The constants**](#the-constants)
   - [The Potentially **Nested Logic**](#the-potentially-nested-logic)
   - [**The SRP violation**](#the-srp-violation)
   - [The **Hidden State** case](#the-hidden-state-case)
@@ -60,36 +59,6 @@ In our code example, this will not be the case because of the simple logic of th
 
 Even more the case on scalable applications...
 
-### **The constants**
-
-To be more consistent, ***extract `action.types` as constants in a separate file...***
-
-```typescript
-/* just renaming those constants, then extract that block code to a separate file  */
-const SEARCH_REPOSITORIES = 'search_repositories'
-const SEARCH_REPOSITORIES_SUCCESS = 'search_repositories_success'
-const SEARCH_REPOSITORIES_ERROR = 'search_repositories_error'
-
-
-const reducer = (state: RepositoriesState, action: any) => {
-  switch (action.type) {
-    case 'SEARCH_REPOSITORIES' :
-      ...
-    case 'SEARCH_REPOSITORIES_SUCCESS':
-      ...
-    case 'SEARCH_REPOSITORIES_ERROR':
-      ...          
-    default:
-      return state
-  }
-}
-
-export default reducer
-```
-
-<br>
-<br>
-<br>
 
 ### The Potentially **Nested Logic**
 
@@ -98,7 +67,7 @@ In our situation, building a reducer, maybe we will extract in a file, the  nest
 
 <br>
 
-<img src="nested-logic.png" alt="block-code example of nested logic">
+<img src="./images/nested-logic.png" alt="block-code example of nested logic">
 
 <br>
 <br>
@@ -111,7 +80,7 @@ We attempt to purchase as much as we can simplicity & well organization...
 
 <br>
 
-<img src="srp.png" alt="block-code example of srp violation">
+<img src="./images/srp.png" alt="block-code example of srp violation">
 
 <br>
 <br>
@@ -125,7 +94,7 @@ Following the **FP paradigm, with the use of pure functions as `map(), filter(),
 
 <br>
 
-<img src="hidden-state.png" alt="block-code example of hidden state">
+<img src="./images/hidden-state.png" alt="block-code example of hidden state">
 
 <br>
 <br>

@@ -5,19 +5,19 @@
 <br>
 <br>
 
-<img src="redux-store.png"
+<img src="./images/redux-store.png"
 style="max-width: 1050px; width: 100%; height: auto;">
 
 <br>
 
-<img src="redux-design.png"
+<img src="./images/redux-design.png"
 style="max-width: 1050px; width: 100%; height: auto;">
 
 <br>
 <br>
 <br>
 
-<img src="redux-files-arch.png"
+<img src="./images/redux-files-arch.png"
 style="max-width: 1050px; width: 100%; height: auto;">
 
 </div>

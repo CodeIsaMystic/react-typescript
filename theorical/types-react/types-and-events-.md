@@ -45,7 +45,7 @@ A real quick `EventComponent` to demonstrate and manpulating React, typescript w
 
 <div align="center" >
 
-  <img src="event-handler.png"
+  <img src="./images/event-handler.png"
   style="max-width: 850px; width: 100%; height: auto;">
 </div>
 
@@ -141,7 +141,7 @@ export default EventComponent
 
 <div align="center" >
 
-  <img src="event-handler-drag.png"
+  <img src="./images/event-handler-drag.png"
   style="max-width: 1050px; width: 100%; height: auto;">
 </div>
 

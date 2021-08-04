@@ -5,6 +5,11 @@
   style="max-width: 1050px; width: 100%; height: auto;">
 </div>
 
+<br>
+<br>
+<br>
+<br>
+
 **Table of content**
 - [Introduction](#introduction)
 - [Get it started](#get-it-started)
@@ -44,12 +49,12 @@ It will use the NPM api package search...
 
 ## Thinking about Design First
 
-**Before to code, it could be clever to take some times thinking about what's gonna be m the Store of the Application!!!**
+***Before to code,** it could be clever to take some times thinking about what's gonna be m the Store of the Application!!!*
 
-- about the reducers
-- the informations they gonna be to hold
-- the different actions creators
-- and actions to be created as well
+- about **the reducers**
+- **the informations** they gonna be to hold
+- the **different actions creators**
+- and **actions to be created** as well
 ...
 
 <br>
@@ -57,7 +62,7 @@ It will use the NPM api package search...
 
 ## The NPM api
 
-**Understand the data which it's gonna evenly being fetched from the api**
+***Understand the data** which it's gonna evenly being fetched from the api*
 
 **Looking at the url:**
 
@@ -142,4 +147,4 @@ It will use the NPM api package search...
 }
 ```
 
-In that program, we will only purchase the `package` property. We do not need more... Notice that the term "package" is a Typescript Reserved Keyword, so we will maybe use "repository" to fetch the NPM Packages.
+In that program, we will only purchase the `package` property. We do not need more... Notice that the term "package" is a Typescript Reserved Keyword, so we will maybe use "repositories" to fetch the NPM Packages.

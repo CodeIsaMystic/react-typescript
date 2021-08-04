@@ -2,7 +2,7 @@
   <h1>Redux Store & Reducers</h1>
   <h3>About reducers...</h3>
 
-  <img src="redux-store.png"
+  <img src="./images/redux-store.png"
   style="max-width: 1050px; width: 100%; height: auto;">
 
   <br>
@@ -18,8 +18,9 @@
     - [2.The Interface](#2the-interface)
     - [3. The Switch statements](#3-the-switch-statements)
     - [4. The Actions](#4-the-actions)
-    - [**NOTE :** as Simple is this Reducer, Typescript must do more...](#note--as-simple-is-this-reducer-typescript-must-do-more)
-    - [**NOTE :** extract & rename those actions types as Constants](#note--extract--rename-those-actions-types-as-constants)
+      - [**NOTE :** as Simple is this Reducer, Typescript must do more...](#note--as-simple-is-this-reducer-typescript-must-do-more)
+    - [5.Typechecking with TS](#5typechecking-with-ts)
+      - [**NOTE :** about avoiding the `any` TS type](#note--about-avoiding-the-any-ts-type)
 
 <br>
 <br>
@@ -29,7 +30,7 @@
 
 ### Files Architecture
 
-![files architecture image](files-arch1.png)
+![files architecture image](./images/files-arch1.png)
 
 ### Reducer file
 
@@ -59,6 +60,9 @@ const reducer = (state: RepositoriesState, action: any) => {}
 export default reducer
 ```
 
+<br>
+<br>
+
 #### 3. The Switch statements
 
 ```typescript
@@ -86,10 +90,11 @@ export default reducer
 ```
 
 <br>
-<br
+<br>
 
 #### 4. The Actions
 
+*Adding the return values `{ loading: true, error: null, data: [] }` expected for each actions...*
 
 ```typescript
 interface RepositoriesState {
@@ -116,9 +121,9 @@ export default reducer
 ```
 
 <br>
-<br
+<br>
 
-#### **NOTE :** as Simple is this Reducer, Typescript must do more...
+##### **NOTE :** as Simple is this Reducer, Typescript must do more...
 
 We just noticed that ***this Reducer model should work but Typescript must do more, especially on that switch statement distributing data.***
 
@@ -131,11 +136,18 @@ it could be an Array of course, an object too but even strings and numbers!!! So
 <br>
 <br
 
+#### 5.Typechecking with TS
 
-#### **NOTE :** extract & rename those actions types as Constants
+ - **Defining the return values** `: RepositoriesState` of the reducer, we ensure Typescript is checking for us **what types of values we need for each properties** `{ loading: true, error: null, data: [] }`. Otherwise TS will show an error...
 
-To gain in terms of visibility and organization, we define our actions types as Constant written in uppercase...
-Those constants should be extract in separate file to be consistent...
+<br>
+<br>
+
+```typescript
+const reducer = (state: RepositoriesState, action: any): RepositoriesState => {
+  switch (action.type) { ... }
+}
+```
 
 ```typescript
 interface RepositoriesState {
@@ -143,20 +155,16 @@ interface RepositoriesState {
     error: string | null,
     data: string[]
 }
-const SEARCH_REPOSITORIES = 'search_repositories'
-const SEARCH_REPOSITORIES_SUCCESS = 'search_repositories_success'
-const SEARCH_REPOSITORIES_ERROR = 'search_repositories_error'
 
-
-/* action are types as `any` waiting to define those actions */
-const reducer = (state: RepositoriesState, action: any) => {
+/* we define the type expected on the reducer output */
+const reducer = (state: RepositoriesState, action: any): RepositoriesState => {
   switch (action.type) {
-    case 'SEARCH_REPOSITORIES' :
-      ...
-    case 'SEARCH_REPOSITORIES_SUCCESS':
-      ...
-    case 'SEARCH_REPOSITORIES_ERROR':
-      ...          
+    case 'search_repositories' :
+      return { loading: true, error: null, data: [] }
+    case 'search_repositories_success':
+      return { loading: false, error: null, data: action.payload }
+    case 'search_repositories_error':
+      return { loading: false, error: action.payload, data: [] }
     default:
       return state
   }
@@ -165,9 +173,67 @@ const reducer = (state: RepositoriesState, action: any) => {
 export default reducer
 ```
 
-<br>
-<br>
-<br>
+- **Defining the Action types, by adding an `interface`** and **replace it in the reducer function `action: Action`**
+
+```typescript
+interface Action {
+  type: string,
+  payload ?: any
+}
+```
+
+```typescript
+const reducer = (state: RepositoriesState, action: Action): RepositoriesState => {
+  ...
+}
+```
+
 <br>
 <br>
 
+##### **NOTE :** about avoiding the `any` TS type
+
+*Here a schema of why we potentially need to differenciate those Actions types...*
+
+![The repositories reducer organization](./images/repos-reducer-schema.png)
+
+<br>
+<br>
+
+*To avoid the `any` type of Typescript, we code 3 different `interface` to have 3 separates Actions Interfaces.*
+
+![3 different actions](./images/repos-reducer-actions.png)
+
+<br>
+<br>
+
+*Here the code example in our app.*
+
+```typescript
+interface SearchRepositoriesAction  {
+  type: 'search_repositories'
+}
+
+interface SearchRepositoriesSuccessAction {
+  type: 'search_repositories_success'
+ payload: string[] 
+}
+
+interface SearchRepositoriesErrorAction {
+  type: 'search_repositories_error'
+  payload: string   
+} 
+```
+
+*Applying those Actions intefaces:*
+
+```typescript
+
+const reducer = (
+  state: RepositoriesState,
+  action:
+    | SearchRepositoriesAction
+    | SearchRepositoriesSuccessAction
+    | SearchRepositoriesErrorAction
+): RepositoriesState => { ... }
+```
