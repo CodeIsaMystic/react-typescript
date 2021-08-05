@@ -2,7 +2,7 @@ import {
   SearchRepositoriesAction,
   SearchRepositoriesSuccessAction,
   SearchRepositoriesErrorAction
- } from './searchRepositories'
+ } from './searchRepositoriesActions'
 
 
 
