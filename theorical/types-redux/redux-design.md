@@ -5,8 +5,6 @@
 <br>
 <br>
 
-## Store
-
 Thinking about this simple project, it will need ***3 separates properties to a single repositories reducer**.
 
 Our Store, as simple it is must be relevant, and in this case ***we will attempt to define our Actions in the best way we could using Typescript.***
@@ -16,19 +14,11 @@ style="max-width: 1050px; width: 100%; height: auto;">
 
 <br>
 
-## Design
-
-
-
 <img src="./images/redux-design.png"
 style="max-width: 1050px; width: 100%; height: auto;">
 
 <br>
 <br>
-<br>
-
-## Architecture
-
 <br>
 <br>
 

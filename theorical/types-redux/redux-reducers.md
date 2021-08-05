@@ -1,3 +1,11 @@
+<style>
+bgc { background-color: #21222C; color: #f1f1f1; padding: 5px; border-radius: 2px; }
+anc { color: rebeccapurple; font-weight: bold; }
+anc2 { background-color: rebeccapurple; color: #fff; padding: 5px; px; border-radius: 2px; }
+high { background-color: yellow; font-style: italic; padding: 2px; color: #000; }
+b { font-weight: bold; color: #000; }
+</style>
+
 <div align="center" >
   <h1>Redux Store & Reducers</h1>
   <h3>About reducers...</h3>
@@ -9,37 +17,37 @@
 
 </div>
 
-**Table of Content**
+**<bgc>Table of Content</bgc>**
 
-- [Reducer: creating & organizing](#reducer-creating--organizing)
-  - [Files Architecture](#files-architecture)
-  - [Reducer file (repositoriesReducer.ts)](#reducer-file-repositoriesreducerts)
-    - [1. The Basics](#1-the-basics)
-    - [2. The Interface](#2-the-interface)
-    - [3. The Switch statements](#3-the-switch-statements)
-    - [4. The Actions](#4-the-actions)
-      - [**NOTE :** as simple is this Reducer, Typescript must do more...](#note--as-simple-is-this-reducer-typescript-must-do-more)
-    - [5. Typechecking with TS](#5-typechecking-with-ts)
-      - [**Defining the return values** `: RepositoriesState` of the reducer](#defining-the-return-values--repositoriesstate-of-the-reducer)
-      - [**Defining the Action types**](#defining-the-action-types)
-      - [**NOTE :** about avoiding the `any` TS type](#note--about-avoiding-the-any-ts-type)
-    - [6. Organizing Files Architecture](#6-organizing-files-architecture)
-      - [Files Architecture review](#files-architecture-review)
-      - [Files Architecture Pattern growing up](#files-architecture-pattern-growing-up)
+- [<anc>Reducer: creating & organizing</anc>](#ancreducer-creating--organizinganc)
+  - [<anc>Files Architecture</anc>](#ancfiles-architectureanc)
+  - [<anc>Reducer file (repositoriesReducer.ts)</anc>](#ancreducer-file-repositoriesreducertsanc)
+    - [<anc>1. The Basics</anc>](#anc1-the-basicsanc)
+    - [<anc>2. The Interface</anc>](#anc2-the-interfaceanc)
+    - [<anc>3. The Switch statements</anc>](#anc3-the-switch-statementsanc)
+    - [<anc>4. The Actions</anc>](#anc4-the-actionsanc)
+      - [<high>NOTE :</high> <b>as simple is this Reducer, Typescript must do more...</b>](#highnote-high-bas-simple-is-this-reducer-typescript-must-do-moreb)
+  - [<anc>Typechecking with TS</anc>](#anctypechecking-with-tsanc)
+    - [<anc>Defining the return values `: RepositoriesState` of the reducer</anc>](#ancdefining-the-return-values--repositoriesstate-of-the-reduceranc)
+    - [<anc>Defining the Action types</anc>](#ancdefining-the-action-typesanc)
+    - [<high>NOTE :</high> <b>about avoiding the `any` TS type</b>](#highnote-high-babout-avoiding-the-any-ts-typeb)
+  - [<anc>Organizing Files Architecture</anc>](#ancorganizing-files-architectureanc)
+    - [<anc>Files Architecture review</anc>](#ancfiles-architecture-reviewanc)
+    - [<anc>Files Architecture Pattern growing up</anc>](#ancfiles-architecture-pattern-growing-upanc)
 
 <br>
 <br>
 <br>
 
-## Reducer: creating & organizing
+## <anc>Reducer: creating & organizing</anc>
 
-### Files Architecture
+### <anc>Files Architecture</anc>
 
 ![files architecture image](./images/files-arch1.png)
 
-### Reducer file (repositoriesReducer.ts)
+### <anc>Reducer file (repositoriesReducer.ts)</anc>
 
-#### 1. The Basics
+#### <anc>1. The Basics</anc>
 
 ```typescript
 const reducer = (state, action) => {}
@@ -50,7 +58,7 @@ export default reducer
 <br>
 <br>
 
-#### 2. The Interface
+#### <anc>2. The Interface</anc>
 
 ```typescript
 interface RepositoriesState {
@@ -68,7 +76,7 @@ export default reducer
 <br>
 <br>
 
-#### 3. The Switch statements
+#### <anc>3. The Switch statements</anc>
 
 ```typescript
 interface RepositoriesState {
@@ -97,7 +105,7 @@ export default reducer
 <br>
 <br>
 
-#### 4. The Actions
+#### <anc>4. The Actions</anc>
 
 *Adding the return values `{ loading: true, error: null, data: [] }` expected for each actions...*
 
@@ -130,11 +138,11 @@ export default reducer
 
 ---
 
-##### **NOTE :** as simple is this Reducer, Typescript must do more...
+##### <high>NOTE :</high> <b>as simple is this Reducer, Typescript must do more...</b>
 
 We just noticed that ***this Reducer model should work but Typescript must do more, especially on that switch statement distributing data.***
 
-You can clearly think that data could be as many types projects are different. And Typescript will secure those types.
+You can clearly think that data could be as many types projects are different. And Typescript must secure those types.
 
 **Example of the data property :**
 it could be an Array of course, an object too but even strings and numbers!!! So we must use Typescript on that purpose!!
@@ -144,9 +152,9 @@ it could be an Array of course, an object too but even strings and numbers!!! So
 <br>
 <br
 
-#### 5. Typechecking with TS
+### <anc>Typechecking with TS</anc>
 
-##### **Defining the return values** `: RepositoriesState` of the reducer
+#### <anc>Defining the return values `: RepositoriesState` of the reducer</anc>
 
 We ensure Typescript is checking for us **what types of values we need for each properties `{ loading: true, error: null, data: [] }`. Otherwise TS will show an error...**
 
@@ -183,7 +191,7 @@ const reducer = (state: RepositoriesState, action: any): RepositoriesState => {
 export default reducer
 ```
 
-##### **Defining the Action types** 
+#### <anc>Defining the Action types</anc>
 
 By **adding an `interface`** and **replace it in the reducer function `action: Action`**
 
@@ -205,7 +213,7 @@ const reducer = (state: RepositoriesState, action: Action): RepositoriesState =>
 
 ---
 
-##### **NOTE :** about avoiding the `any` TS type
+#### <high>NOTE :</high> <b>about avoiding the `any` TS type</b>
 
 *Here a schema of why we potentially need to differentiate those Actions types...*
 
@@ -221,7 +229,7 @@ const reducer = (state: RepositoriesState, action: Action): RepositoriesState =>
 <br>
 <br>
 
-1. **Defining interfaces**
+<anc>1. Defining interfaces</anc>
 
 *Here the code example in our app.*
 
@@ -259,7 +267,7 @@ const reducer = (
 <br>
 <br>
 
-2. **Grouping those interfaces in One `type`**
+<anc>2. Grouping those interfaces in One `type`</anc>
 
 ```typescript
 /* grouping all actions in one type called "Action" */
@@ -276,11 +284,11 @@ const reducer = (
 }
 ```
 
-3. **Set an `enum` action type object**
+<anc>3. Set an `enum` action type object</anc>
 
 To approve ***code readability and following the convention, we replace the `'search_repositories_success'` by `SEARCH_REPOSITORIES_SUCCESS` all capitalized using the `enum` typescript keyword*** which set those string to an `ActionType` object.
 
-- **define `enum ActionType {}`**
+- <anc2>define `enum ActionType {}`</anc2>
 
 ```typescript
 enum ActionType  {
@@ -290,12 +298,12 @@ enum ActionType  {
 }
 ```
 
-- **Accessing those**
+- <anc2>Accessing those</anc2>
 
 to access: `ActionType.SEARCH_REPOSITORIES`
 in our case: `case ActionType.SEARCH_REPOSITORIES :`
 
-- **Replacing in all file**
+- <anc2>Replacing in all file</anc2>
 
 ```typescript
 const reducer = (
@@ -321,7 +329,7 @@ interface SearchRepositoriesAction  {
 }
 ```
 
-4. **Extract those settings to a File**
+4. <anc>Extract those settings to a File</anc>
 
 On that purpose, processing the code control of our projects, we must extract some works we do to improve even more our code base.
 
@@ -336,9 +344,9 @@ On that purpose, processing the code control of our projects, we must extract so
 <br>
 <br>
 
-#### 6. Organizing Files Architecture
+### <anc>Organizing Files Architecture</anc>
 
-##### Files Architecture review
+#### <anc>Files Architecture review</anc>
 
 ![files architecture image](./images/files-arch2.png)
 
@@ -381,7 +389,7 @@ export enum ActionType {
 
 - Use the `import` / `export` syntax to have access...
 
-##### Files Architecture Pattern growing up
+#### <anc>Files Architecture Pattern growing up</anc>
 
 We can now easily visualize our code base as well organized, adding features on each sections of our project.
 
