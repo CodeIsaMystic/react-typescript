@@ -1,1 +1,1 @@
-import { searchRepositories } from './searchRepositoriesActionCreator'
+export { searchRepositories } from './searchRepositoriesActionCreator'

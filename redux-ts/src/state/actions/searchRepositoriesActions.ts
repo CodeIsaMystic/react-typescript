@@ -8,7 +8,7 @@ export interface SearchRepositoriesAction  {
 
 export interface SearchRepositoriesSuccessAction {
   type: ActionType.SEARCH_REPOSITORIES_SUCCESS
- payload: string[] 
+  payload: string[] 
 }
 
 export interface SearchRepositoriesErrorAction {
